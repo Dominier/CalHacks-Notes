@@ -37,15 +37,23 @@ def convert_file():
     return jsonify(notes=notes)
 
 def convert_to_text(file_path):
-    # This function should take a file path (pointing to an MP3, MP4, or text file)
-    # and return the contents of the file as text.
-    # You'll need to fill in the details here.
-    pass
+    if file_path.lower().endswith('.mp3'):
+        save_audio(file_path)
+        return transcribe_audio(file_path)
+    elif file_path.lower().endswith('.mp4'):
+        save_video(file_path)
+        mp3_file_path = file_path.rsplit('.', 1)[0] + '.mp3'
+        convert_mp4_to_mp3(file_path, mp3_file_path)
+        return transcribe_audio(mp3_file_path)
+    elif file_path.lower().endswith('.txt'):
+        with open(file_path, 'r') as file:
+            return file.read()
+    else:
+        return None
 
 def convert_to_notes(text):
-    # This function should take a string of text and use OpenAI to convert it to notes.
-    # You'll need to fill in the details here.
-    pass
+    response = send_to_chatGPT(text)
+    return get_chat_response(response)
 
 if __name__ == '__main__':
     app.run(port=5000)
@@ -80,15 +88,6 @@ def send_to_chatGPT(user_input):
     )
     return response
 
-def get_chat_response(user_input):
-    response = send_to_chatGPT(user_input)
+def get_chat_response(response):
     chatGPT_response = response.choices[0].message.content
     return chatGPT_response
-
-# Usage
-save_audio('input.mp3')
-save_video('input.mp4')
-convert_mp4_to_mp3('input.mp4', 'output.mp3')
-transcribed_text = transcribe_audio('output.mp3')
-chat_response = get_chat_response(transcribed_text)
-print(chat_response)
