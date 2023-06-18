@@ -4,6 +4,7 @@ from pydub import AudioSegment
 from moviepy.editor import VideoFileClip, AudioFileClip
 import speech_recognition as sr
 from flask import Flask, request, jsonify
+import sqlite3
 
 app = Flask(__name__)
 
@@ -35,6 +36,27 @@ def convert_file():
 
     # Return the notes as a JSON response
     return jsonify(notes=notes)
+
+    # Connect to the database (this will create it if it doesn't exist)
+    conn = sqlite3.connect('my_database.db')
+
+    # Create a cursor object
+    c = conn.cursor()
+
+    # Create a table (this only needs to be done once)
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS responses (
+            id INTEGER PRIMARY KEY,
+            response TEXT
+        )
+    ''')
+
+    # Insert the chatGPT_response into the table
+    c.execute('INSERT INTO responses (response) VALUES (?)', (chatGPT_response,))
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
 
 def convert_to_text(file_path):
     if file_path.lower().endswith('.mp3'):
@@ -91,3 +113,4 @@ def send_to_chatGPT(user_input):
 def get_chat_response(response):
     chatGPT_response = response.choices[0].message.content
     return chatGPT_response
+    
