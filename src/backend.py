@@ -113,4 +113,3 @@ def send_to_chatGPT(user_input):
 def get_chat_response(response):
     chatGPT_response = response.choices[0].message.content
     return chatGPT_response
-    
