@@ -44,6 +44,11 @@ body {
     border-radius: 10px;
 }
 
+p {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
 /* PROJECT PAGE */
 .project-title {
     text-align: center;
