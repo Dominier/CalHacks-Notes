@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="projects.js"></script>
+    <title>Project</title>
+</head>
+<body>
+<!--Navigation Bar to move from tab to tab-->
+<nav class="navigation">
+    <ul class="navigation-ul">
+        <li class="navigation-list"><a href="{{ url_for('about') }}">About Us</a></li>
+        <li class="navigation-list"><a href="{{ url_for('home') }}">Projects</a></li>
+    </ul>
+</nav>
+
+    <div class="section">
+        <h1>Instructions</h1>
+        <p>Please upload mp4, mp3, HEIC, mov, jpg, or PDF files.</p>
+        <p>Please wait for our AI to generate a response.</p>
+
+    </div>
+
+    <div class="upload" method = "post">
+        <form action ="/" method = "post" enctype="multipart/form-data">
+            {{form.hidden_tag()}}
+            {{form.file()}}
+            {{form.submit()}}
+        </form>
+            <p>{{message}}</p>
+    </div>
+
+    <div class="output">
+        <p id="AI-output">Sample Text</p>
+    </div>
+
+    <div class = "savedFiles">
+        <h1>File Names</h1>
+        <ul id="fileList"></ul>
+            <!--
+            {% for x in files%}
+            <p>{{x}}</p>
+            {% endfor %}
+            -->
+    </div>
+</body>
+</html>

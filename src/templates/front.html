@@ -9,12 +9,12 @@
 </head>
 <body>
    <!--Navigation Bar to move from tab to tab-->
-   <nav class="navigation">
-        <ul class="navigation-ul">
-            <li class="navigation-list"><a href="front.html">About Us</a></li>
-            <li class="navigation-list"><a href="project.html">Projects</a></li>
-        </ul>
-    </nav>
+<nav class="navigation">
+    <ul class="navigation-ul">
+        <li class="navigation-list"><a href="{{ url_for('about') }}">About Us</a></li>
+        <li class="navigation-list"><a href="{{ url_for('home') }}">Projects</a></li>
+    </ul>
+</nav>
 
     <!-- Project Description -->
     <div class="section">
