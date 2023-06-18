@@ -1,1 +1,81 @@
+body {
+    background-color: #f1efea;
+}
 
+/* Navigation Bar */
+.navigation {
+    margin: -8px; /* TEMP FIX */
+    
+}
+
+.navigation-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #414091;
+
+}
+
+.navigation-list {
+    float: left;
+    border-right: 1px solid #faedde;
+}
+
+.navigation-list a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navigation-list a:hover {
+    background-color: orange;
+}
+/* ABOUT PAGE */
+
+/* Sections */
+.section {
+    margin: 30px;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+
+p {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+/* PROJECT PAGE */
+.project-title {
+    text-align: center;
+}
+
+.upload {
+    display: block;
+    margin: 30px;
+    border: 1px black dotted;
+    border-radius: 10px;
+    text-align: center;
+    height: 100px;
+}
+
+#notes {
+    padding-top: 10px;
+    padding-right: 25em;
+}
+
+.output {
+    display: block;
+    margin: 30px;
+    border: 1px black solid;
+    border-radius: 10px;
+    height: 300px;
+}
+
+#AI-output {
+    padding: 0px 10px 10px 10px;
+}
