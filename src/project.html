@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="projects.js"></script>
+    <title>Project</title>
+</head>
+<body>
+<!--Navigation Bar to move from tab to tab-->
+   <nav class="navigation">
+        <ul class="navigation-ul">
+            <li class="navigation-list"><a href="front.html">About Us</a></li>
+            <li class="navigation-list"><a href="project.html">Projects</a></li>
+        </ul>
+    </nav>
+
+    <div class="section">
+        <h1>Instructions</h1>
+        <p>Please upload mp4, mp3, HEIC, mov, jpg, or PDF files.</p>
+        <p>Please wait for our AI to generate a response.</p>
+
+    </div>
+
+    <div class="upload">
+        <label for="notes">
+            <input id="notes" type="file" name="file">
+        </label>
+        <label for="clear">
+            <button id="clear-notes">Clear</button>
+        </label>
+    </div>
+
+    <div class="output">
+        <p id="AI-output">Sample Text</p>
+    </div>
+
+</body>
+</html>
