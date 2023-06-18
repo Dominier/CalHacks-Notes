@@ -1,19 +1,29 @@
-from flask import Flask, render_template, request
+
+from flask import Flask
+from flask import render_template
+from flask import request
+import sqlite3
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
-def home():
-    if request.method == "POST":
-        user = request.form["nm"]
-        return user + " is their name"  # You should return a response here
-    else: 
-        print("A GET request was used")
-        name = "John Doe"
-        return render_template("project.html", name=name)
-     
-if __name__ == "__main__":
-    app.run()
+#Home Page Route
+@app.route("/")
+def front():
+    return render_template("front.html")
+
+#Route to project page
+
+@app.route("/enterfile")
+def enterfile():
+    return render_template("project.html")
+
+@app.route("fileProcess", methods = ['POST', 'GET'])
+def fileProcess():
+    if request.method == 'POST':
+        try:
+            
+
+app.run()
 
 
 

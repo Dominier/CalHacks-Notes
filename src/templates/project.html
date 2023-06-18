@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="projects.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
     <title>Project</title>
 </head>
 <body>
@@ -26,7 +25,7 @@
 
     <div class="upload">
         <label for="notes">
-            <input id="notes" type="file" name="file">
+            <input id="notes" type="file" name="file" onchange="assignName()">
         </label>
         <label for="clear">
             <button id="clear-notes">Clear</button>
@@ -36,6 +35,14 @@
     <div class="output">
         <p id="AI-output">Sample Text</p>
     </div>
+
+    <script>
+        function assignName() {
+            var fileInput = document.getElementById("notes");
+            var name = fileInput.files[0].name;
+            console.log(name); // This will print the file name to the console
+        }
+    </script>
 
 </body>
 </html>
