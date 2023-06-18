@@ -4,8 +4,7 @@ import os
 
 app = Flask(__name__)
 
-
-
+connection = sqlite3.connect('database.db')
 
 
 
