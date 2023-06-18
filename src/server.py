@@ -1,28 +1,49 @@
-from server import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+import os
+import openai
+from pydub import AudioSegment
+from moviepy.editor import VideoFileClip, AudioFileClip
+import speech_recognition as sr
+from app import app
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'  # Use your own SQLite URI
-db = SQLAlchemy(app)
+def save_audio(audio_file_path):
+    audio = AudioSegment.from_mp3(audio_file_path)
+    print(f"Loaded audio file of duration {len(audio)} ms")
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    email = db.Column(db.String(120))
+def save_video(video_file_path):
+    video = VideoFileClip(video_file_path)
+    print(f"Loaded video file of duration {video.duration} s")
 
-@app.route('/api/users', methods=['GET'])
-def get_users():
-    users = User.query.all()
-    return jsonify([{'name': user.name, 'email': user.email} for user in users])
+def convert_mp4_to_mp3(mp4_file_path, mp3_file_path):
+    audio = AudioFileClip(mp4_file_path)
+    audio.write_audiofile(mp3_file_path)
 
-@app.route('/api/users', methods=['POST'])
-def add_user():
-    data = request.get_json()
-    new_user = User(name=data['name'], email=data['email'])
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify({'message': 'New user added'}), 200
+def transcribe_audio(audio_file_path):
+    r = sr.Recognizer()
+    with sr.AudioFile(audio_file_path) as source:
+        audio_data = r.record(source)
+        text = r.recognize_google(audio_data)
+        return text
 
-if __name__ == '__main__':
-    db.create_all()  # Create the database
-    app.run(port=5000, debug=True)
+def send_to_chatGPT(user_input):
+    messages = [
+        {'role': 'system', 'content': 'You are a tutor. Your job is to create notes based on the text I give you.'},
+        {'role': 'user', 'content': user_input}
+    ]
+    response = openai.ChatCompletion.create(
+        model="gpt-4.0",
+        messages=messages
+    )
+    return response
+
+def get_chat_response(user_input):
+    response = send_to_chatGPT(user_input)
+    chatGPT_response = response.choices[0].message.content
+    return chatGPT_response
+
+# Usage
+save_audio('input.mp3')
+save_video('input.mp4')
+convert_mp4_to_mp3('input.mp4', 'output.mp3')
+transcribed_text = transcribe_audio('output.mp3')
+chat_response = get_chat_response(transcribed_text)
+print(chat_response)
