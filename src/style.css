@@ -1,1 +1,56 @@
+body {
+    background-color: #f1efea;
+}
 
+/* Navigation Bar */
+.navigation {
+    margin: -8px; /* TEMP FIX */
+    
+}
+
+.navigation-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #414091;
+
+}
+
+.navigation-list {
+    float: left;
+    border-right: 1px solid #faedde;
+}
+
+.navigation-list a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navigation-list a:hover {
+    background-color: orange;
+}
+/* ABOUT PAGE */
+
+/* Sections */
+.section {
+    margin: 10px;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+
+/* PROJECT PAGE */
+.project-title {
+    text-align: center;
+}
+
+textarea {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
